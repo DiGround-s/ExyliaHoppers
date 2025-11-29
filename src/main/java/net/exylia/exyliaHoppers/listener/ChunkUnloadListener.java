@@ -30,9 +30,17 @@ public class ChunkUnloadListener implements Listener {
         Chunk chunk = event.getChunk();
         ChunkKey key = ChunkKey.of(chunk);
 
-        List<ChunkHopper> hoppers = List.copyOf(registry.getHoppersInChunk(key));
-        for (ChunkHopper hopper : hoppers) {
-            service.unregisterHopper(hopper.getLocation());
+        List<ChunkHopper> hoppers = registry.getHoppersInChunk(key);
+        if (hoppers == null || hoppers.isEmpty()) {
+            service.invalidateChunkCache(chunk);
+            return;
+        }
+
+        List<ChunkHopper> hoppersCopy = new java.util.ArrayList<>(hoppers);
+        for (ChunkHopper hopper : hoppersCopy) {
+            if (hopper != null) {
+                service.unregisterHopper(hopper.getLocation());
+            }
         }
 
         service.invalidateChunkCache(chunk);

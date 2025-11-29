@@ -59,11 +59,12 @@ public class ItemSpawnListener implements Listener {
         ChunkKey chunkKey = ChunkKey.of(itemLoc.getChunk());
 
         List<ChunkHopper> hoppersInChunk = registry.getHoppersInChunk(chunkKey);
-        if (hoppersInChunk.isEmpty()) return;
+        if (hoppersInChunk == null || hoppersInChunk.isEmpty()) return;
 
         double maxDistSq = Math.pow(configManager.getConfig().getMaxCollectionDistance(), 2);
 
         ChunkHopper nearestHopper = hoppersInChunk.stream()
+                .filter(h -> h != null)
                 .filter(h -> HopperUtils.getDistanceSquared(h.getLocation(), itemLoc) <= maxDistSq)
                 .min(Comparator.comparingDouble(h -> HopperUtils.getDistanceSquared(h.getLocation(), itemLoc)))
                 .orElse(null);
