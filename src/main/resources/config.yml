@@ -1,0 +1,46 @@
+# ExyliaHoppers Configuration
+# High-performance chunk-based hopper system
+
+# Performance Settings
+hopper-tick-interval: 8        # Ticks between each hopper collection cycle (8 = 400ms, 20 = 1 second)
+max-items-per-tick: 64         # Maximum items a hopper can collect per tick
+async-chunk-scan: true         # Scan chunks asynchronously for better performance
+cache-ttl-seconds: 60          # How long to cache hopper data (in seconds)
+
+# Thread Pool Configuration
+thread-pool:
+  core-size: 4                 # Core thread pool size
+  max-size: 8                  # Maximum thread pool size
+  fork-join-parallelism: -1    # ForkJoinPool parallelism level (-1 = auto-detect CPU cores)
+
+# Hopper Behavior
+vanilla-hoppers-as-chunk: false  # Convert ALL vanilla hoppers to chunk hoppers
+vanilla-hopper-chunk-radius: 0   # Chunk radius for vanilla hoppers (0 = 1x1, 1 = 3x3, 2 = 5x5, etc.)
+max-collection-distance: 32      # Maximum distance (in blocks) items can be from hopper
+prioritize-closer-items: true    # Collect closer items first
+
+# Hopper Types Configuration
+hopper-types:
+  CHUNK_1x1:
+    enabled: true
+    chunks-radius: 0           # 0 = only the chunk where the hopper is placed (1x1)
+    display-name: "&6Chunk Hopper &7(1x1)"
+
+  CHUNK_3x3:
+    enabled: true
+    chunks-radius: 1           # 1 = radius of 1 chunk around hopper (3x3 total)
+    display-name: "&6Chunk Hopper &7(3x3)"
+
+  CHUNK_5x5:
+    enabled: true
+    chunks-radius: 2           # 2 = radius of 2 chunks around hopper (5x5 total)
+    display-name: "&6Chunk Hopper &7(5x5)"
+
+  CHUNK_7x7:
+    enabled: true
+    chunks-radius: 3           # 3 = radius of 3 chunks around hopper (7x7 total)
+    display-name: "&6Chunk Hopper &7(7x7)"
+
+# Debugging and Statistics
+debug: false                   # Enable debug logging
+statistics-enabled: true       # Track statistics (items collected, etc.)
