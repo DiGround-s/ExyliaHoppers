@@ -50,6 +50,11 @@ public class ItemSpawnListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onItemSpawn(ItemSpawnEvent event) {
         Item item = event.getEntity();
+
+        if (item.getThrower() != null) {
+            return;
+        }
+
         Location itemLoc = item.getLocation();
         ChunkKey chunkKey = ChunkKey.of(itemLoc.getChunk());
 
