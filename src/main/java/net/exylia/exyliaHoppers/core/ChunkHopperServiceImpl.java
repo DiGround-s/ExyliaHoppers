@@ -9,6 +9,8 @@ import net.exylia.exyliaHoppers.cache.ChunkKey;
 import net.exylia.exyliaHoppers.cache.HopperCache;
 import net.exylia.exyliaHoppers.cache.HopperLocationKey;
 import net.exylia.exyliaHoppers.config.ConfigManager;
+import net.exylia.exyliaHoppers.integration.StackerManager;
+import net.exylia.exyliaHoppers.integration.StackerProvider;
 import net.exylia.exyliaHoppers.util.PDCUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -31,6 +33,7 @@ public class ChunkHopperServiceImpl implements ChunkHopperService {
     private final ChunkItemCache chunkItemCache;
     @Getter
     private final ConfigManager configManager;
+    private final StackerManager stackerManager;
 
     private final AtomicLong totalItemsCollected = new AtomicLong(0);
 
@@ -39,12 +42,14 @@ public class ChunkHopperServiceImpl implements ChunkHopperService {
             HopperRegistry registry,
             HopperCache hopperCache,
             ChunkItemCache chunkItemCache,
-            ConfigManager configManager
+            ConfigManager configManager,
+            StackerManager stackerManager
     ) {
         this.registry = registry;
         this.hopperCache = hopperCache;
         this.chunkItemCache = chunkItemCache;
         this.configManager = configManager;
+        this.stackerManager = stackerManager;
     }
 
     @Override
@@ -186,6 +191,11 @@ public class ChunkHopperServiceImpl implements ChunkHopperService {
     @Override
     public int getMaxItemsPerTick() {
         return configManager.getConfig().getMaxItemsPerTick();
+    }
+
+    @Override
+    public StackerProvider getStackerProvider() {
+        return stackerManager.getProvider();
     }
 
     public void incrementTotalItemsCollected() {

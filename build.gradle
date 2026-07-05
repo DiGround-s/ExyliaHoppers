@@ -27,6 +27,9 @@ repositories {
     maven { url "https://repo.codemc.org/repository/maven-public/" }
     maven { url "https://repository.minecodes.pl/releases" }
     maven {
+        url = 'https://repo.rosewooddev.io/repository/public/'
+    }
+    maven {
         name = "minecraft-libraries"
         url = uri("https://libraries.minecraft.net")
     }
@@ -37,6 +40,7 @@ repositories {
 }
 
 dependencies {
+    compileOnly 'dev.rosewood:rosestacker:1.5.36'
     compileOnly 'com.github.ben-manes.caffeine:caffeine:3.2.2'
     compileOnly 'com.google.inject:guice:5.1.0'
     compileOnly 'io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT'

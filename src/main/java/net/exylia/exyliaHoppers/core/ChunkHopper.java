@@ -36,10 +36,10 @@ public class ChunkHopper {
     }
 
     public int getChunkX() {
-        return x >> 4;
+        return location.getChunk().getX();
     }
 
     public int getChunkZ() {
-        return z >> 4;
+        return location.getChunk().getZ();
     }
 }

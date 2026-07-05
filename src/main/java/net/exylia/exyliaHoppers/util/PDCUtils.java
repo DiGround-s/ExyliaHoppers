@@ -58,7 +58,11 @@ public class PDCUtils {
         String typeName = pdc.get(TYPE_KEY, PersistentDataType.STRING);
         if (typeName == null) return Optional.empty();
 
-        return Optional.of(HopperType.fromString(typeName));
+        org.bukkit.Bukkit.getLogger().info("[PDCUtils] Raw type from PDC: '" + typeName + "'");
+        HopperType result = HopperType.fromString(typeName);
+        org.bukkit.Bukkit.getLogger().info("[PDCUtils] Converted to: " + result);
+
+        return Optional.of(result);
     }
 
     public static Optional<HopperType> getHopperType(Block block) {

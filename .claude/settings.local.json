@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "/home/diground/Nextcloud/JavaProjects/Exylia/ExyliaEntityLimiter"
+    ],
+    "allow": [
+      "Bash(./gradlew clean build:*)"
+    ]
+  }
+}

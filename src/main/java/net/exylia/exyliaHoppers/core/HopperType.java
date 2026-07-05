@@ -16,9 +16,14 @@ public enum HopperType {
     private final String defaultDisplayName;
 
     public static HopperType fromString(String name) {
+        if (name == null || name.isEmpty()) {
+            return VANILLA;
+        }
+
         try {
-            return valueOf(name.toUpperCase());
+            return valueOf(name);
         } catch (IllegalArgumentException e) {
+            org.bukkit.Bukkit.getLogger().warning("Failed to parse HopperType from: '" + name + "' - " + e.getMessage());
             return VANILLA;
         }
     }

@@ -9,7 +9,6 @@ import net.exylia.exyliaHoppers.cache.HopperLocationKey;
 import net.exylia.exyliaHoppers.command.HopperCommand;
 import net.exylia.exyliaHoppers.config.ConfigManager;
 import net.exylia.exyliaHoppers.core.ChunkHopperService;
-import net.exylia.exyliaHoppers.core.ChunkHopperServiceImpl;
 import net.exylia.exyliaHoppers.core.HopperRegistry;
 import net.exylia.exyliaHoppers.inject.HopperModule;
 import net.exylia.exyliaHoppers.listener.ChunkLoadListener;

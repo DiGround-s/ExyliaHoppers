@@ -61,6 +61,12 @@ public class ConfigManager {
                 .prioritizeCloserItems(cfg.getBoolean("prioritize-closer-items", true))
                 .debug(cfg.getBoolean("debug", false))
                 .statisticsEnabled(cfg.getBoolean("statistics-enabled", true))
+                .enableCollectionEffects(cfg.getBoolean("collection-effects.enabled", true))
+                .enableCollectionSound(cfg.getBoolean("collection-effects.sound.enabled", true))
+                .enableCollectionParticles(cfg.getBoolean("collection-effects.particles.enabled", true))
+                .soundVolume((float) cfg.getDouble("collection-effects.sound.volume", 0.2))
+                .soundPitch((float) cfg.getDouble("collection-effects.sound.pitch", 1.5))
+                .particleCount(cfg.getInt("collection-effects.particles.count", 5))
                 .hopperTypes(hopperTypes)
                 .build();
     }

@@ -3,6 +3,7 @@ package net.exylia.exyliaHoppers.api;
 import com.github.benmanes.caffeine.cache.stats.CacheStats;
 import net.exylia.exyliaHoppers.core.ChunkHopper;
 import net.exylia.exyliaHoppers.core.HopperType;
+import net.exylia.exyliaHoppers.integration.StackerProvider;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
@@ -44,4 +45,6 @@ public interface ExyliaHoppersAPI {
     int getTickInterval();
 
     int getMaxItemsPerTick();
+
+    StackerProvider getStackerProvider();
 }

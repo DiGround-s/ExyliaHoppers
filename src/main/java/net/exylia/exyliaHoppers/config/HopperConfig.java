@@ -48,6 +48,24 @@ public class HopperConfig {
     @Builder.Default
     private boolean statisticsEnabled = true;
 
+    @Builder.Default
+    private boolean enableCollectionEffects = true;
+
+    @Builder.Default
+    private boolean enableCollectionSound = true;
+
+    @Builder.Default
+    private boolean enableCollectionParticles = true;
+
+    @Builder.Default
+    private float soundVolume = 0.2f;
+
+    @Builder.Default
+    private float soundPitch = 1.5f;
+
+    @Builder.Default
+    private int particleCount = 5;
+
     private Map<HopperType, HopperTypeConfig> hopperTypes;
 
     @Data

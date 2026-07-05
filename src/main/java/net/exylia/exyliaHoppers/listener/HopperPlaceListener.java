@@ -32,7 +32,26 @@ public class HopperPlaceListener implements Listener {
         if (block.getType() != Material.HOPPER) return;
 
         ItemStack item = event.getItemInHand();
+
+        boolean debug = ((net.exylia.exyliaHoppers.core.ChunkHopperServiceImpl) service)
+                .getConfigManager().getConfig().isDebug();
+
+        if (debug) {
+            Bukkit.getLogger().info("=== HOPPER PLACEMENT ===");
+            Bukkit.getLogger().info("Player: " + event.getPlayer().getName());
+            Bukkit.getLogger().info("Location: " + block.getLocation());
+            Bukkit.getLogger().info("Item in hand: " + item);
+            Bukkit.getLogger().info("Item meta: " + (item.getItemMeta() != null ? "Present" : "NULL"));
+        }
+
         Optional<HopperType> typeOpt = PDCUtils.getHopperType(item);
+
+        if (debug) {
+            Bukkit.getLogger().info("PDC Type detected: " + (typeOpt.isPresent() ? typeOpt.get() : "NONE"));
+            if (typeOpt.isPresent()) {
+                Bukkit.getLogger().info("PDC Range: " + PDCUtils.getHopperRange(item));
+            }
+        }
 
         HopperType type;
         int range;
@@ -43,11 +62,24 @@ public class HopperPlaceListener implements Listener {
             if (range == 0) {
                 range = type.getChunksRadius();
             }
+            if (debug) {
+                Bukkit.getLogger().info("Using hopper from item PDC");
+                Bukkit.getLogger().info("Final Type: " + type);
+                Bukkit.getLogger().info("Final Range: " + range);
+            }
         } else if (service.isVanillaAsChunk()) {
             type = HopperType.VANILLA;
             range = ((net.exylia.exyliaHoppers.core.ChunkHopperServiceImpl) service)
                     .getConfigManager().getConfig().getVanillaHopperChunkRadius();
+            if (debug) {
+                Bukkit.getLogger().info("Using vanilla-as-chunk mode");
+                Bukkit.getLogger().info("Final Type: " + type);
+                Bukkit.getLogger().info("Final Range: " + range);
+            }
         } else {
+            if (debug) {
+                Bukkit.getLogger().info("No PDC found and vanilla-as-chunk is disabled. Not registering.");
+            }
             return;
         }
 
@@ -56,10 +88,18 @@ public class HopperPlaceListener implements Listener {
 
         if (hopperPlaceEvent.isCancelled()) {
             event.setCancelled(true);
+            if (debug) {
+                Bukkit.getLogger().info("HopperPlaceEvent was cancelled by another plugin");
+            }
             return;
         }
 
         PDCUtils.setHopperData(block, type, range);
         service.registerHopper(block.getLocation(), type);
+
+        if (debug) {
+            Bukkit.getLogger().info("Hopper registered successfully");
+            Bukkit.getLogger().info("========================");
+        }
     }
 }
